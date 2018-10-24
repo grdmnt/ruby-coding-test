@@ -7,13 +7,25 @@
 
 <p>
   <strong>Firstname:</strong>
-  <%= @user.firstname %>
+  <%= @user.first_name %>
 </p>
 
 <p>
   <strong>Last name:</strong>
   <%= @user.last_name %>
 </p>
+
+
+<strong>Email History:</strong>
+<% if @user.email_history.any? %>
+<ul>
+  <% @user.email_history.each do |email_snapshot| %>
+  <li><strong><%= email_snapshot[:email] %></strong> (<%= email_snapshot[:created_at] %>)</li>
+  <% end %>
+</ul>
+<% else %>
+<p>There are no previous emails yet.</p>
+<% end %>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

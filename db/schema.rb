@@ -10,16 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181022102015) do
+ActiveRecord::Schema.define(version: 20181024122406) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
-    t.string "firstname"
+    t.string "first_name"
     t.string "last_name"
-    t.boolean "is_customer"
-    t.boolean "is_admin"
+    t.string "type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "versions", force: :cascade do |t|
+    t.string "item_type", null: false
+    t.integer "item_id", null: false
+    t.string "event", null: false
+    t.string "whodunnit"
+    t.text "object", limit: 1073741823
+    t.datetime "created_at"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
 end
